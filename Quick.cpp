@@ -6,7 +6,7 @@ using namespace std;
 
 int partition(vector<int> &v, int low, int high)
 {
-    int pivot = v[high];
+    int pivot = v[high]; // Last element as pivot
     int i = low - 1;
 
     for (int j = low; j < high; j++)
@@ -27,13 +27,15 @@ void quickSort(vector<int> &v, int low, int high)
     if (low < high)
     {
         int pi = partition(v, low, high);
-        quickSort(v, low, pi - 1);
-        quickSort(v, pi + 1, high);
+
+        quickSort(v, low, pi - 1);  // Left side
+        quickSort(v, pi + 1, high); // Right side
     }
 }
 
 void dataSet(int n, vector<int> &a)
 {
+    a.reserve(n); // Prevents repeated reallocations
     for (int i = 0; i < n; i++)
     {
         a.push_back(rand());
@@ -45,7 +47,9 @@ int main()
     srand(time(0));
 
     vector<int> a;
-    dataSet(1e5, a);
+    int n = 100000;
+
+    dataSet(n, a);
 
     clock_t start = clock();
 
@@ -59,8 +63,8 @@ int main()
     cout << "Name : Shahriar Shayekh" << endl;
     cout << "ID: C243020" << endl;
     cout << "Algo Name : Quick Sort" << endl;
-    cout << "Input Time : 1e5" << endl;
-    cout << "Sorting time: " << durationMs << " ms " << endl;
+    cout << "Input Size : " << n << endl;
+    cout << "Sorting Time: " << durationMs << " ms" << endl;
 
     return 0;
 }

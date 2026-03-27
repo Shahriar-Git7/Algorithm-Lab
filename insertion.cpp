@@ -1,8 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <unordered_set>
-#include <ctime>
+#include <chrono>
 #include <iomanip>
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
 void insertionSort(vector<int> &a)
@@ -16,7 +19,6 @@ void insertionSort(vector<int> &a)
             a[i + 1] = a[i];
             --i;
         }
-
         a[i + 1] = key;
     }
 }
@@ -24,7 +26,6 @@ void insertionSort(vector<int> &a)
 void dataSet(int n, vector<int> &a)
 {
     unordered_set<int> used;
-
     while (used.size() < n)
     {
         int x = rand() % 1000000 + 1;
@@ -37,23 +38,23 @@ void dataSet(int n, vector<int> &a)
 
 int main()
 {
-    srand(time(0));
-
+    srand(static_cast<unsigned int>(time(0)));
     vector<int> a;
-    dataSet(1000, a);
+    dataSet(100000, a);
 
-    clock_t start = clock();
-
+    chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
     insertionSort(a);
+    chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 
-    clock_t end = clock();
+    chrono::microseconds durationUs = chrono::duration_cast<chrono::microseconds>(end - start);
+    double durationMs = durationUs.count() / 1000.0;
 
-    double durationMs = (double)(end - start) * 1000 / CLOCKS_PER_SEC;
     cout << fixed << setprecision(3);
     cout << "Name : Shahriar Shayekh" << endl;
     cout << "ID: C243020" << endl;
     cout << "Algo Name : Insertion Sort" << endl;
     cout << "Input Time : 1e5" << endl;
-    cout << "Sorting time: " << durationMs << " ms " << endl;
+    cout << "Sorting time: " << durationMs << " ms (" << durationUs.count() << " us)" << endl;
+
     return 0;
 }
