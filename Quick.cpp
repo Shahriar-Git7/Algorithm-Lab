@@ -59,7 +59,7 @@ int main()
     cout << "Name : Shahriar Shayekh" << endl;
     cout << "ID: C243020" << endl;
     cout << "Algo Name : Quick Sort" << endl;
-    cout << "Input Time : 1e4" << endl;
+    cout << "Input Time : 1e5" << endl;
     cout << "Sorting time: " << durationMs << " ms " << endl;
 
     return 0;
